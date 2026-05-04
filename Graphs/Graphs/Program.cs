@@ -1,6 +1,9 @@
+using System;
+using System.Linq;
+using System.Collections.Generic;
+using Graphs;
 
 namespace Graphs;
-// Undirected Weighted Graph Implementation
 public class Graph
 {
     private readonly Dictionary<string, Dictionary<string, int>> _adjacencyList;
@@ -8,7 +11,6 @@ public class Graph
     {
         _adjacencyList = new();
     }
-    // Adds a vertex to the graph if it doesn't already exist
     public void AddVertex(string v)
     {
         if (!_adjacencyList.ContainsKey(v))
@@ -26,7 +28,6 @@ public class Graph
         _adjacencyList[s].Add(d, w);
         _adjacencyList[d].Add(s, w);
     }
-    // Removes the edge between s and d if it exists
     public void RemoveEdge(string s, string d)
     {
         if (_adjacencyList.ContainsKey(s) && _adjacencyList.ContainsKey(d))
@@ -35,40 +36,46 @@ public class Graph
             _adjacencyList[d].Remove(s);
         }
     }
-    // Removes a vertex and all its associated edges
+
     public void RemoveVertex(string v)
     {
         if (!_adjacencyList.ContainsKey(v)) return;
+
         // 1. Visit all neighbors and remove the connection to v
         foreach (var neighbor in _adjacencyList[v].Keys)
         {
             _adjacencyList[neighbor].Remove(v);
         }
+
         // 2. Delete the vertex itself
         _adjacencyList.Remove(v);
     }
-    // Checks if an edge exists between s and d
+
     public bool HasEdge(string s, string d)
     {
         return _adjacencyList.ContainsKey(s) && _adjacencyList[s].ContainsKey(d);
     }
-    // Returns the neighbors of a vertex along with the weights of the edges
+
+
+
     public Dictionary<string, int>? GetNeighbors(string v)
     {
         return _adjacencyList.TryGetValue(v, out var value) ? value : null;
     }
-    // Breadth First Search using a queue (iterative)
     public void BFS(string v)
     {
         if (!_adjacencyList.ContainsKey(v)) return;
+
         HashSet<string> visited = new();
         Queue<string> queue = new();
         visited.Add(v);
         queue.Enqueue(v);
+
         while (queue.Count > 0)
         {
             var current = queue.Dequeue();
             p(current);
+
             foreach (var n in _adjacencyList[current].Keys)
             {
                 if (!visited.Contains(n))
@@ -79,10 +86,10 @@ public class Graph
             }
         }
     }
-    // Depth First Search using a stack (iterative)
     public void DFS(string v)
     {
         if (!_adjacencyList.ContainsKey(v)) return;
+
         HashSet<string> visited = new();
         Stack<string> stack = new();
         stack.Push(v);
@@ -98,12 +105,12 @@ public class Graph
             {
                 if (!visited.Contains(n))
                 {
+
                     stack.Push(n);
                 }
             }
         }
     }
-    // Returns the weight of the edge between s and d if it exists, otherwise null
     public int? GetWeight(string s, string d)
     {
         if (!_adjacencyList.ContainsKey(s)
@@ -113,27 +120,32 @@ public class Graph
         }
         if (_adjacencyList[s].ContainsKey(d))
             return _adjacencyList[s][d];
+
         return null;
+
     }
-    public static void p<T>(T t) => Console.WriteLine($"   {t}");
-    // This is a backtracking algorithm to find all paths from s to d
-    // Heavy & Discouraged
+    public static void p<T>(T t) => Console.Write($"   {t}");
+
+
     public List<List<string>> GetAllPaths(string s, string d)
     {
         List<List<string>> allPaths = new();
         HashSet<string> visited = new();
         List<string> currentPath = new();
+
         FindPathsRecursive(s, d, visited, currentPath, allPaths);
         return allPaths;
     }
+
     private void FindPathsRecursive(string current, string destination,
         HashSet<string> visited, List<string> currentPath, List<List<string>> allPaths)
     {
         visited.Add(current);
         currentPath.Add(current);
+
         if (current == destination)
         {
-            // We must create a NEW list copy, otherwise it changes as we backtrack
+            // we must create a NEW list copy, otherwise it changes as we backtrack
             allPaths.Add(new List<string>(currentPath));
         }
         else
@@ -149,15 +161,61 @@ public class Graph
                 }
             }
         }
-        // BACKTRACK: This is the "magic" part
+
+        // backtracking: this is the "magic" part
         currentPath.RemoveAt(currentPath.Count - 1);
         visited.Remove(current);
     }
+    public List<string> GetShortestPath(string s, string d)
+    {
+        if (!_adjacencyList.ContainsKey(s) || !_adjacencyList.ContainsKey(d))
+        {
+            return new List<string>();
+        }
+        var distance = new Dictionary<string, int>();
+        var previous = new Dictionary<string, string?>();
+        var pq = new PriorityQueue<string, int>();
+        var path = new List<string>();
+        foreach (var v in _adjacencyList.Keys)
+        {
+            distance[v] = int.MaxValue;
+            previous[v] = null;
+        }
+        distance[s] = 0;
+        pq.Enqueue(s, 0);
+        while (pq.Count > 0)
+        {
+            var current = pq.Dequeue();
+            if (current == d) break;
+            foreach (var neighbor in _adjacencyList[current])
+            {
+                int alt = distance[current] + neighbor.Value;
+                if (alt < distance[neighbor.Key])
+                {
+                    distance[neighbor.Key] = alt;
+                    previous[neighbor.Key] = current;
+                    pq.Enqueue(neighbor.Key, alt);
+                }
+            }
+        }
+        for (string? at = d; at != null; at = previous.GetValueOrDefault(at))
+        {
+            path.Add(at);
+        }
+        path.Reverse();
+        path.Add(distance[d].ToString());
+        return path.Count > 0 && path[0] == s ? path : new List<string>();
+    }
 }
+
+
+
+
 public static class Program
 {
     static void p<T>(T t) => Console.Write($"   {t}");
     static void p() => Console.WriteLine();
+
     public static void Main()
     {
         Graph graph = new();
@@ -168,21 +226,33 @@ public static class Program
         graph.AddVertex("E");
         graph.AddVertex("F");
         graph.AddVertex("G");
+        graph.AddVertex("Z");
+        graph.AddVertex("X");
+
+
         graph.AddEdge("A", "B", 5);
         graph.AddEdge("A", "C", 4);
         graph.AddEdge("A", "D", 6);
+
         graph.AddEdge("B", "D", 7);
         graph.AddEdge("B", "E", 8);
+
+
         graph.AddEdge("C", "F", 12);
         graph.AddEdge("C", "D", 2);
+
         graph.AddEdge("D", "G", 11);
+
         graph.AddEdge("E", "G", 5);
+
         graph.AddEdge("F", "G", 10);
-        graph.GetNeighbors("D")?.ToList().ForEach(neighbor => p(neighbor));
-        graph.DFS("A");
-        p();
-        graph.BFS("A");
-        p();
-        
+
+
+        graph.GetShortestPath("G", "A").ForEach(s => p(s));
+
+
+
+
+
     }
 }
