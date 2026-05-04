@@ -1,9 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Csharp Apps\\Data Structure\\Graphs\\",
+  "WorkspaceRootPath": "D:\\Csharp Apps\\data-structure\\Graphs\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AF245417-ECF9-866D-7FC5-DC6750CEE2C9}|Graphs\\Graphs.csproj|d:\\csharp apps\\data structure\\graphs\\graphs\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{AF245417-ECF9-866D-7FC5-DC6750CEE2C9}|Graphs\\Graphs.csproj|d:\\csharp apps\\data-structure\\graphs\\graphs\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AF245417-ECF9-866D-7FC5-DC6750CEE2C9}|Graphs\\Graphs.csproj|solutionrelative:graphs\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -28,11 +28,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Csharp Apps\\Data Structure\\Graphs\\Graphs\\Program.cs",
+              "DocumentMoniker": "D:\\Csharp Apps\\data-structure\\Graphs\\Graphs\\Program.cs",
               "RelativeDocumentMoniker": "Graphs\\Program.cs",
-              "ToolTip": "D:\\Csharp Apps\\Data Structure\\Graphs\\Graphs\\Program.cs",
+              "ToolTip": "D:\\Csharp Apps\\data-structure\\Graphs\\Graphs\\Program.cs",
               "RelativeToolTip": "Graphs\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAACUBAAAAAAAAAAAIwD4BAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-03T14:03:09.446Z",
               "EditorCaption": ""

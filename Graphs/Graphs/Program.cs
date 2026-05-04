@@ -7,6 +7,7 @@ namespace Graphs;
 public class Graph
 {
     private readonly Dictionary<string, Dictionary<string, int>> _adjacencyList;
+
     public Graph()
     {
         _adjacencyList = new();
@@ -36,7 +37,6 @@ public class Graph
             _adjacencyList[d].Remove(s);
         }
     }
-
     public void RemoveVertex(string v)
     {
         if (!_adjacencyList.ContainsKey(v)) return;
@@ -50,19 +50,15 @@ public class Graph
         // 2. Delete the vertex itself
         _adjacencyList.Remove(v);
     }
-
     public bool HasEdge(string s, string d)
     {
         return _adjacencyList.ContainsKey(s) && _adjacencyList[s].ContainsKey(d);
     }
-
-
-
     public Dictionary<string, int>? GetNeighbors(string v)
     {
         return _adjacencyList.TryGetValue(v, out var value) ? value : null;
     }
-    public void BFS(string v)
+    public void BreadFirstSearch(string v)
     {
         if (!_adjacencyList.ContainsKey(v)) return;
 
@@ -86,7 +82,7 @@ public class Graph
             }
         }
     }
-    public void DFS(string v)
+    public void DepthFirstSearch(string v)
     {
         if (!_adjacencyList.ContainsKey(v)) return;
 
@@ -124,9 +120,9 @@ public class Graph
         return null;
 
     }
+    // helper method
     public static void p<T>(T t) => Console.Write($"   {t}");
-
-
+    // very heavy method: get all paths from s to d using backtracking 
     public List<List<string>> GetAllPaths(string s, string d)
     {
         List<List<string>> allPaths = new();
@@ -136,7 +132,7 @@ public class Graph
         FindPathsRecursive(s, d, visited, currentPath, allPaths);
         return allPaths;
     }
-
+    // helper method for GetAllPaths: this is the backtracking part
     private void FindPathsRecursive(string current, string destination,
         HashSet<string> visited, List<string> currentPath, List<List<string>> allPaths)
     {
@@ -166,7 +162,8 @@ public class Graph
         currentPath.RemoveAt(currentPath.Count - 1);
         visited.Remove(current);
     }
-    public List<string> GetShortestPath(string s, string d)
+    //Dijkstra's algorithm to find the shortest path from s to d
+    public List<string> GetShortestPathDij(string s, string d)
     {
         if (!_adjacencyList.ContainsKey(s) || !_adjacencyList.ContainsKey(d))
         {
@@ -206,16 +203,79 @@ public class Graph
         path.Add(distance[d].ToString());
         return path.Count > 0 && path[0] == s ? path : new List<string>();
     }
+    private class Edge
+    {
+        public string From { get; }
+        public string To {get;}
+        public int W { get; }
+        public Edge(string from, string to, int w)
+        {
+            From = from;
+            To = to;
+            W = w;
+        }
+    }
+    public List<string> GetShortestPathBell(string s, string d)
+    {
+        var distance = new Dictionary<string, int>();
+        var previous = new Dictionary<string, string?>();
+        var path = new List<string>();
+        var edges = new List<Edge>();
+        foreach (var v in _adjacencyList.Keys)
+        {
+            distance[v] = int.MaxValue;
+            previous[v] = null;
+        }
+        distance[s] = 0;
+        var num_vertices = _adjacencyList.Count;
+        
+        foreach(var kvp in _adjacencyList)
+        {
+            var from = kvp.Key;
+            foreach(var neighbor in kvp.Value)
+            {
+                edges.Add(new Edge(from, neighbor.Key, neighbor.Value));
+            }
+        }
+        for(int i = 1; i <=num_vertices - 1; i++)
+        {
+            bool anyChange = false;
+            foreach (var edge in edges)
+            {
+                if(distance[edge.From] != int.MaxValue)
+                {
+                var alt = distance[edge.From] + edge.W;
+                if(alt < distance[edge.To])
+                {
+                    distance[edge.To] = alt;
+                    previous[edge.To] = edge.From;
+                    anyChange = true;
+                }
+                }
+            }
+            if(!anyChange) break;
+        }
+        foreach(var edge in edges)
+        {
+            if(distance[edge.From] != int.MaxValue)
+            {
+            if(distance[edge.From] + edge.W < distance[edge.To])
+            {
+                throw new Exception("Graph contains a negative weight cycle");
+            }
+            }
+        }
+        for(string at = d; at != null; at = previous.GetValueOrDefault(at)!)
+        {
+            path.Add(at);
+        }
+        path.Reverse();
+        return path.Count > 0 && path[0] == s ? path : new List<string>();
+    }
 }
-
-
-
-
 public static class Program
 {
     static void p<T>(T t) => Console.Write($"   {t}");
-    static void p() => Console.WriteLine();
-
     public static void Main()
     {
         Graph graph = new();
@@ -232,9 +292,9 @@ public static class Program
 
         graph.AddEdge("A", "B", 5);
         graph.AddEdge("A", "C", 4);
-        graph.AddEdge("A", "D", 6);
+        graph.AddEdge("A", "D", 6); 
 
-        graph.AddEdge("B", "D", 7);
+        graph.AddEdge("B", "D", 7); 
         graph.AddEdge("B", "E", 8);
 
 
@@ -248,11 +308,10 @@ public static class Program
         graph.AddEdge("F", "G", 10);
 
 
-        graph.GetShortestPath("G", "A").ForEach(s => p(s));
-
-
-
-
+        graph.GetShortestPathDij("G", "A").ForEach(s => p(s));
+        Console.WriteLine();
+        graph.GetShortestPathBell("G", "A").ForEach(s => p(s));
+        
 
     }
 }
