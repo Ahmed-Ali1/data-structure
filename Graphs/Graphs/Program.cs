@@ -3,8 +3,6 @@ namespace Graphs;
 // Undirected Weighted Graph Implementation
 public class Graph
 {
-    // The graph is represented as an adjacency list,
-    // where each vertex maps to a dictionary of its neighbors and the corresponding edge weights
     private readonly Dictionary<string, Dictionary<string, int>> _adjacencyList;
     public Graph()
     {
@@ -18,7 +16,6 @@ public class Graph
             _adjacencyList[v] = new();
         }
     }
-    // The graph is undirected, so we add the edge in both directions
     public void AddEdge(string s, string d, int w)
     {
         if (!_adjacencyList.ContainsKey(s)
