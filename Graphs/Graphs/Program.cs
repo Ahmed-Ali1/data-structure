@@ -6,6 +6,30 @@ using Graphs;
 namespace Graphs;
 public class Graph
 {
+    private class Edge
+    {
+        public string From { get; }
+        public string To { get; }
+        public int W { get; }
+        public Edge(string from, string to, int w)
+        {
+            From = from;
+            To = to;
+            W = w;
+        }
+    }
+    private class Node
+    {
+        public string Name { get; init; }
+        public int H { get; set; }
+        public int G { get; set; } = int.MaxValue;
+        public Node? Parent { get; set; }
+        public Node(string name, int h)
+        {
+            Name = name;
+            H = h;
+        }
+    }
     private readonly Dictionary<string, Dictionary<string, int>> _adjacencyList;
 
     public Graph()
@@ -203,18 +227,7 @@ public class Graph
         path.Add(distance[d].ToString());
         return path.Count > 0 && path[0] == s ? path : new List<string>();
     }
-    private class Edge
-    {
-        public string From { get; }
-        public string To {get;}
-        public int W { get; }
-        public Edge(string from, string to, int w)
-        {
-            From = from;
-            To = to;
-            W = w;
-        }
-    }
+    
     public List<string> GetShortestPathBell(string s, string d)
     {
         var distance = new Dictionary<string, int>();

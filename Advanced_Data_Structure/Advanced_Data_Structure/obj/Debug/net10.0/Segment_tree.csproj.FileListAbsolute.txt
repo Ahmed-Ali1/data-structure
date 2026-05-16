@@ -1,0 +1,15 @@
+D:\Csharp Apps\data-structure\Segment_tree\Segment_tree\bin\Debug\net10.0\Segment_tree.exe
+D:\Csharp Apps\data-structure\Segment_tree\Segment_tree\bin\Debug\net10.0\Segment_tree.deps.json
+D:\Csharp Apps\data-structure\Segment_tree\Segment_tree\bin\Debug\net10.0\Segment_tree.runtimeconfig.json
+D:\Csharp Apps\data-structure\Segment_tree\Segment_tree\bin\Debug\net10.0\Segment_tree.dll
+D:\Csharp Apps\data-structure\Segment_tree\Segment_tree\bin\Debug\net10.0\Segment_tree.pdb
+D:\Csharp Apps\data-structure\Segment_tree\Segment_tree\obj\Debug\net10.0\Segment_tree.GeneratedMSBuildEditorConfig.editorconfig
+D:\Csharp Apps\data-structure\Segment_tree\Segment_tree\obj\Debug\net10.0\Segment_tree.AssemblyInfoInputs.cache
+D:\Csharp Apps\data-structure\Segment_tree\Segment_tree\obj\Debug\net10.0\Segment_tree.AssemblyInfo.cs
+D:\Csharp Apps\data-structure\Segment_tree\Segment_tree\obj\Debug\net10.0\Segment_tree.csproj.CoreCompileInputs.cache
+D:\Csharp Apps\data-structure\Segment_tree\Segment_tree\obj\Debug\net10.0\Segment_tree.sourcelink.json
+D:\Csharp Apps\data-structure\Segment_tree\Segment_tree\obj\Debug\net10.0\Segment_tree.dll
+D:\Csharp Apps\data-structure\Segment_tree\Segment_tree\obj\Debug\net10.0\refint\Segment_tree.dll
+D:\Csharp Apps\data-structure\Segment_tree\Segment_tree\obj\Debug\net10.0\Segment_tree.pdb
+D:\Csharp Apps\data-structure\Segment_tree\Segment_tree\obj\Debug\net10.0\Segment_tree.genruntimeconfig.cache
+D:\Csharp Apps\data-structure\Segment_tree\Segment_tree\obj\Debug\net10.0\ref\Segment_tree.dll

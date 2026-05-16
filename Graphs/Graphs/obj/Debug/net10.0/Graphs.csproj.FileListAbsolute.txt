@@ -1,0 +1,15 @@
+D:\Csharp Apps\data-structure\Graphs\Graphs\bin\Debug\net10.0\Graphs.exe
+D:\Csharp Apps\data-structure\Graphs\Graphs\bin\Debug\net10.0\Graphs.deps.json
+D:\Csharp Apps\data-structure\Graphs\Graphs\bin\Debug\net10.0\Graphs.runtimeconfig.json
+D:\Csharp Apps\data-structure\Graphs\Graphs\bin\Debug\net10.0\Graphs.dll
+D:\Csharp Apps\data-structure\Graphs\Graphs\bin\Debug\net10.0\Graphs.pdb
+D:\Csharp Apps\data-structure\Graphs\Graphs\obj\Debug\net10.0\Graphs.GeneratedMSBuildEditorConfig.editorconfig
+D:\Csharp Apps\data-structure\Graphs\Graphs\obj\Debug\net10.0\Graphs.AssemblyInfoInputs.cache
+D:\Csharp Apps\data-structure\Graphs\Graphs\obj\Debug\net10.0\Graphs.AssemblyInfo.cs
+D:\Csharp Apps\data-structure\Graphs\Graphs\obj\Debug\net10.0\Graphs.csproj.CoreCompileInputs.cache
+D:\Csharp Apps\data-structure\Graphs\Graphs\obj\Debug\net10.0\Graphs.sourcelink.json
+D:\Csharp Apps\data-structure\Graphs\Graphs\obj\Debug\net10.0\Graphs.dll
+D:\Csharp Apps\data-structure\Graphs\Graphs\obj\Debug\net10.0\refint\Graphs.dll
+D:\Csharp Apps\data-structure\Graphs\Graphs\obj\Debug\net10.0\Graphs.pdb
+D:\Csharp Apps\data-structure\Graphs\Graphs\obj\Debug\net10.0\Graphs.genruntimeconfig.cache
+D:\Csharp Apps\data-structure\Graphs\Graphs\obj\Debug\net10.0\ref\Graphs.dll
